@@ -1,4 +1,4 @@
-# Monitoring Full-Stack
+# Docker Monitor Template
 
 A production-ready monitoring system with comprehensive observability for servers, containers, and applications. This setup provides complete visibility into your infrastructure with metrics collection, log aggregation, and visualization dashboards.
 
