@@ -1,4 +1,4 @@
-# Docker Monitor Template
+# Sentinel
 
 A production-ready monitoring system with comprehensive observability for servers, containers, and applications. This setup provides complete visibility into your infrastructure with metrics collection, log aggregation, and visualization dashboards.
 
