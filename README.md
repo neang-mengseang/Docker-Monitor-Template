@@ -140,6 +140,28 @@ Copy `.env.example` to `.env` and configure:
 - [Setup Guide](docs/setup.md) - Detailed setup instructions
 - [Monitoring Services](docs/monitoring-services.md) - How to add your own services to monitor
 
+## Quick Start with Grafana
+
+1. **Login to Grafana** at http://localhost:3000
+   - Username: `admin`
+   - Password: `strongpassword`
+
+2. **Add Prometheus as data source**
+   - Go to **Configuration** → **Data Sources**
+   - Click **Add data source** → **Prometheus**
+   - Set URL to: `http://prometheus:9090`
+   - Click **Save & Test**
+
+3. **Import a dashboard**
+   - Go to **Dashboards** → **Import**
+   - Import dashboard ID `1860` (Node Exporter Full)
+   - Or browse Grafana dashboards: https://grafana.com/grafana/dashboards/
+
+4. **View metrics**
+   - Explore metrics in the **Explore** tab
+   - Select Prometheus data source
+   - Query metrics like `up`, `container_cpu_usage_seconds_total`, etc.
+
 ## Use Cases
 
 - **DevOps Monitoring**: Monitor development and production infrastructure
