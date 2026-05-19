@@ -91,10 +91,10 @@ echo -e "${YELLOW}Pulling latest Docker images...${NC}"
 docker compose pull
 
 # Start all services
-echo -e "${YELLOW}Starting all services...${NC}"
+echo -e "${YELLOW}Starting monitoring stack...${NC}"
 docker compose up -d
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ All services started${NC}"
+    echo -e "${GREEN}✓ Monitoring stack started${NC}"
 else
     echo -e "${RED}✗ Failed to start services${NC}"
     echo "Check logs: docker compose logs"
@@ -102,17 +102,25 @@ else
 fi
 
 echo ""
+echo -e "${YELLOW}Sample app is optional. To start it, run:${NC}"
+echo -e "  docker compose --profile app up -d"
+
+echo ""
 echo -e "${CYAN}====================================${NC}"
 echo -e "${GREEN}Setup Complete!${NC}"
 echo -e "${CYAN}====================================${NC}"
 echo ""
 echo -e "${YELLOW}Access the services:${NC}"
-echo -e "  Web:           http://localhost:8080"
-echo -e "  API:           http://localhost:3001"
-echo -e "  API Health:    http://localhost:3001/health"
 echo -e "  Grafana:       http://localhost:3000 (admin/strongpassword)"
 echo -e "  Prometheus:    http://localhost:9090"
 echo -e "  Loki:          http://localhost:3100"
+echo -e "  cAdvisor:      http://localhost:8082"
+echo -e "  Node Exporter: http://localhost:9100"
+echo ""
+echo -e "${YELLOW}Sample App (optional - run with --profile app):${NC}"
+echo -e "  Web:           http://localhost:8080"
+echo -e "  API:           http://localhost:3001"
+echo -e "  API Health:    http://localhost:3001/health"
 echo ""
 echo -e "${YELLOW}Server IP:${NC}"
 echo -e "  $(hostname -I | awk '{print $1}')"

@@ -30,7 +30,6 @@ A production-ready monitoring system with comprehensive observability for server
 
 ## Features
 
-- **Full-Stack Application**: API (Node.js) + Web (React/Vue) with PostgreSQL and Redis (sample app for demonstration)
 - **Monitoring Stack**: Prometheus, Grafana, Loki, Promtail
 - **System Metrics**: Node Exporter for host metrics
 - **Container Metrics**: cAdvisor for container-level monitoring
@@ -40,6 +39,7 @@ A production-ready monitoring system with comprehensive observability for server
 - **Reverse Proxy Compatible**: Works with any reverse proxy (Nginx, Caddy, Traefik, etc.)
 - **Windows Support**: Works on Windows with Docker Desktop (WSL2)
 - **Production Ready**: Persistent volumes, health checks, auto-restart
+- **Optional Sample App**: Demo application (API + Web + PostgreSQL + Redis) for reference
 
 ## Project Structure
 
@@ -88,18 +88,51 @@ The setup script will:
 # Copy environment file
 cp .env.example .env
 
-# Start all services (core + monitoring)
+# Edit .env to change default passwords and ports if needed
+# nano .env  # or your preferred editor
+
+# Start monitoring stack only (recommended)
 docker compose up -d
+
+# Start with sample app (optional)
+docker compose --profile app up -d
 ```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+**Grafana (required):**
+- `GF_SECURITY_ADMIN_USER` - Grafana admin username (default: admin)
+- `GF_SECURITY_ADMIN_PASSWORD` - Grafana admin password (change for production)
+
+**Database (only if using sample app):**
+- `POSTGRES_DB` - Database name (default: app)
+- `POSTGRES_USER` - Database user (default: postgres)
+- `POSTGRES_PASSWORD` - Database password (change for production)
+
+**Ports** (change if conflicts):
+- `API_PORT` - API service port (default: 3001) - only with sample app
+- `WEB_PORT` - Web frontend port (default: 8080) - only with sample app
+- `GRAFANA_PORT` - Grafana port (default: 3000)
+- `PROMETHEUS_PORT` - Prometheus port (default: 9090)
+- `LOKI_PORT` - Loki port (default: 3100)
+- `NODE_EXPORTER_PORT` - Node Exporter port (default: 9100)
+- `CADVISOR_PORT` - cAdvisor port (default: 8082)
 
 ## Access Services
 
-- **Web**: http://localhost:8080
-- **API**: http://localhost:3001
-- **API Health**: http://localhost:3001/health
+**Monitoring Services (always available):**
 - **Grafana**: http://localhost:3000 (default: admin/strongpassword — change in `.env`)
 - **Prometheus**: http://localhost:9090
 - **Loki**: http://localhost:3100
+- **cAdvisor**: http://localhost:8082
+- **Node Exporter**: http://localhost:9100
+
+**Sample App (only with `--profile app`):**
+- **Web**: http://localhost:8080
+- **API**: http://localhost:3001
+- **API Health**: http://localhost:3001/health
 
 ## Documentation
 
